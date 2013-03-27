@@ -194,6 +194,13 @@
            </item>
           </layout>
          </item>
+         <item>
+          <widget class="QPushButton" name="uiDeleteCalendar">
+           <property name="text">
+            <string>Delete Calendar</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>

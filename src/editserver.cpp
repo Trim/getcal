@@ -17,6 +17,7 @@ void EditServer::setConnections(){
     QObject::connect(uiUserNameLine, SIGNAL(textChanged(QString)), _server, SLOT(setUserName(QString)));
     QObject::connect(uiUserPassLine, SIGNAL(textChanged(QString)), _server, SLOT(setUserPass(QString)));
     QObject::connect(uiAddCalendar, SIGNAL(clicked()), this, SLOT(addCalendar()));
+    QObject::connect(uiDeleteCalendar, SIGNAL(clicked()), this, SLOT(deleteCalendar()));
 }
 
 void EditServer::addServer(){
@@ -41,6 +42,13 @@ void EditServer::addCalendar(){
         _server->addCalendar(newCal);
         uiCalendarInput->clear();
     }
+}
+
+void EditServer::deleteCalendar(){
+    QListWidgetItem *item = uiCalendarList->currentItem();
+    QString cal=item->text();
+    _server->removeCalendar(cal);
+    delete item;
 }
 
 void EditServer::updateUI(){

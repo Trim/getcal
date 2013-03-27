@@ -28,6 +28,7 @@ public slots:
 
 private slots:
     void addCalendar();
+    void deleteCalendar();
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
