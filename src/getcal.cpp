@@ -18,9 +18,6 @@
 ****************************************************************************/
 
 #include "getcal.h"
-#include <qpushbutton.h>
-#include <qsoftmenubar.h>
-#include <QMenu>
 
 /*
  *  Constructs a Example which is a child of 'parent', with the
@@ -39,6 +36,8 @@ Getcal::Getcal(QWidget *parent, Qt::WFlags f)
     winSettings = new ServerSettings(parent, f);
     menu->addAction("Settings", winSettings, SLOT(openSettings()));
     menu->addAction("Quit", this, SLOT(close()));
+
+    QObject::connect(uiRemoveEvents, SIGNAL(clicked()), this, SLOT(removeEvents()));
 }
 
 /*
@@ -47,4 +46,23 @@ Getcal::Getcal(QWidget *parent, Qt::WFlags f)
 Getcal::~Getcal()
 {
     // no need to delete child widgets, Qt does it all for us
+}
+
+void Getcal::removeEvents(){
+    qDebug()<<"Getcal : will remove events.";
+    uiRemoveEvents->setDisabled(true);
+    uiImportEvents->setDisabled(true);
+    QString program = "remove_events.pl";
+    QStringList arguments;
+    arguments << QTMOKO_ICALDB;
+
+    QProcess *removeProcess = new QProcess(this);
+    removeProcess->start(program, arguments);
+
+    while(removeProcess->waitForFinished()){
+        qDebug()<<"Getcal : wait end of remove script.";
+    }
+    qDebug()<<"Getcal : Process finished with status : "<<removeProcess->exitStatus();
+    uiRemoveEvents->setDisabled(false);
+    uiImportEvents->setDisabled(false);
 }

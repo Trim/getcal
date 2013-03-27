@@ -21,7 +21,14 @@
 #define GETCAL_H
 #include "ui_getcal.h"
 #include "serversettings.h"
+#include <qpushbutton.h>
+#include <qsoftmenubar.h>
+#include <QMenu>
+#include <QDebug>
 #include <QString>
+#include <QProcess>
+
+#define QTMOKO_ICALDB "/home/root/Applications/Qtopia/qtopia_db.sqlite"
 
 class Getcal : public QWidget, public Ui_Getcal
 {
@@ -31,6 +38,8 @@ private:
 public:
     Getcal( QWidget *parent = 0, Qt::WFlags f = 0 );
     ~Getcal();
+private slots:
+    void removeEvents();
 };
 Q_DECLARE_METATYPE(IcalServer);
 #endif
