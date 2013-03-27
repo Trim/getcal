@@ -43,7 +43,6 @@ void EditServer::addCalendar(){
 }
 
 void EditServer::updateUI(){
-
     uiServerNameLine->setText(_server->getServerName());
     uiServerAddressLine->setText(_server->getServerAddress());
     uiUserNameLine->setText(_server->getUserName());
@@ -62,6 +61,7 @@ void EditServer::closeEvent(QCloseEvent *event){
     if(_server->getServerName().isEmpty()){
         QMessageBox* msgBox = new QMessageBox(this);
         msgBox->setText("You have to enter a name for this server.");
+        msgBox->setIcon(QMessageBox::Warning);
         msgBox->exec();
         event->ignore();
     }else{
