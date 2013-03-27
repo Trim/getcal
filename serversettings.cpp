@@ -16,7 +16,8 @@ ServerSettings::ServerSettings(QWidget *parent, Qt::WFlags f) :
     menu->addAction("Add server", _editServer, SLOT(addServer()));
     menu->addAction("Edit server", this, SLOT(editServer()));
     QObject::connect(this, SIGNAL(editClickedServer(IcalServer *)), _editServer, SLOT(editServer(IcalServer*)));
-    QObject::connect(_editServer, SIGNAL(endEdit(IcalServer*)), this, SLOT(setServer(IcalServer*)));
+    QObject::connect(_editServer, SIGNAL(endAdd(IcalServer*)), this, SLOT(setServer(IcalServer*)));
+    QObject::connect(_editServer, SIGNAL(endEdit()), this, SLOT(saveSettings()));
     QObject::connect(uiSaveConfigButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 }
 

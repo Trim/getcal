@@ -1,5 +1,4 @@
 #include "editserver.h"
-#include <QDebug>
 
 EditServer::EditServer(QWidget *parent, Qt::WFlags f) :
     QWidget(parent, f)
@@ -28,7 +27,8 @@ void EditServer::addServer(){
 }
 
 void EditServer::editServer(IcalServer *server){
-    _server = server;
+    // We need to copy server to be sure to not have segfault when give it back
+    _server = new IcalServer(*server);
     setConnections();
     updateUI();
 }
@@ -64,6 +64,13 @@ void EditServer::updateUI(){
 
 void EditServer::closeEvent(QCloseEvent *event){
     qDebug()<<"EditServer : will emit signal endEdit with server : "<<_server->getServerName();
-    emit endEdit(_server);
-    QWidget::closeEvent(event);
+    if(_server->getServerName().isEmpty()){
+        QMessageBox* msgBox = new QMessageBox(this);
+        msgBox->setText("You have to enter a name for this server.");
+        msgBox->exec();
+        event->ignore();
+    }else{
+        emit endAdd(_server);
+        QWidget::closeEvent(event);
+    }
 }

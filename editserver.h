@@ -4,7 +4,9 @@
 #include <QWidget>
 #include "ui_editserver.h"
 #include "icalserver.h"
-#include <QHideEvent>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QDebug>
 
 class EditServer : public QWidget, public Ui_EditServer
 {
@@ -12,6 +14,7 @@ class EditServer : public QWidget, public Ui_EditServer
 
 private:
     IcalServer *_server;
+    bool _editionMode;
     void updateUI();
     void setConnections();
 
@@ -30,6 +33,7 @@ protected:
     virtual void closeEvent(QCloseEvent *event);
 
 signals:
-    void endEdit(IcalServer *server);
+    void endEdit();
+    void endAdd(IcalServer *server);
 };
 #endif // EDITSERVER_H
