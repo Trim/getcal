@@ -38,21 +38,16 @@ void EditServer::addCalendar(){
     if(newCal.length()!=0 && !_server->getCalendars().contains(newCal)){
         uiCalendarList->addItem(newCal);
         _server->addCalendar(newCal);
+        uiCalendarInput->clear();
     }
 }
 
 void EditServer::updateUI(){
-    uiServerNameLine->clear();
-    uiServerNameLine->insert(_server->getServerName());
 
-    uiServerAddressLine->clear();
-    uiServerAddressLine->insert(_server->getServerAddress());
-
-    uiUserNameLine->clear();
-    uiUserNameLine->insert(_server->getUserName());
-
-    uiUserPassLine->clear();
-    uiUserPassLine->insert(_server->getPassword());
+    uiServerNameLine->setText(_server->getServerName());
+    uiServerAddressLine->setText(_server->getServerAddress());
+    uiUserNameLine->setText(_server->getUserName());
+    uiUserPassLine->setText(_server->getPassword());
 
     uiCalendarList->clear();
     uiCalendarList->addItems(_server->getCalendars());
