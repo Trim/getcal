@@ -1,0 +1,8 @@
+# Don't register swap files and .pro.user
+.swap
+.pro.user
+
+# Directory genearted by compilation
+.moc
+.uic
+.obj
