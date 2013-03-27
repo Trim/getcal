@@ -19,6 +19,8 @@
 #include "ui_serversettings.h"
 #include "editserver.h"
 
+#define SETTINGS_SERVER_GRP "servers"
+
 class ServerSettings : public QWidget, public Ui_ServerSettings
         {
     Q_OBJECT
@@ -40,6 +42,7 @@ public slots:
 private slots:
     void saveSettings();
     void editServer();
+    void deleteServer();
 
 signals:
     void editClickedServer(IcalServer *server);

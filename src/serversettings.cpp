@@ -13,8 +13,12 @@ ServerSettings::ServerSettings(QWidget *parent, Qt::WFlags f) :
     readServerSettings();
 
     QMenu *menu = QSoftMenuBar::menuFor(this);
-    menu->addAction("Add server", _editServer, SLOT(addServer()));
-    menu->addAction("Edit server", this, SLOT(editServer()));
+    menu->addAction("Add a new server", _editServer, SLOT(addServer()));
+
+    QAction * editAction = menu->addAction("Edit this server", this, SLOT(editServer()));
+    menu->insertSeparator(editAction);
+    menu->addAction("Delete this server", this, SLOT(deleteServer()));
+
     QObject::connect(this, SIGNAL(editClickedServer(IcalServer *)), _editServer, SLOT(editServer(IcalServer*)));
     QObject::connect(_editServer, SIGNAL(endEdit(IcalServer*)), this, SLOT(setServer(IcalServer*)));
     QObject::connect(uiSaveConfigButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -29,6 +33,18 @@ void ServerSettings::editServer(){
     QString serverName = serverItem->text();
     IcalServer server = _serverMap->value(serverName);
     emit editClickedServer(&server);
+}
+
+void ServerSettings::deleteServer(){
+    QListWidgetItem *serverItem = uiServerList->currentItem();
+    QString serverName = serverItem->text();
+
+    delete serverItem;
+    _serverMap->remove(serverName);
+
+    _settings->beginGroup(SETTINGS_SERVER_GRP);
+    _settings->remove(serverName);
+    _settings->endGroup();
 }
 
 /* Create widget only when needed */
@@ -50,7 +66,7 @@ void ServerSettings::setServer(IcalServer *server){
 
 /* Save all server settings */
 void ServerSettings::saveSettings(){
-    _settings->beginGroup(QString("servers"));
+    _settings->beginGroup(QString(SETTINGS_SERVER_GRP));
     QString srvName;
     for(QMap<QString, IcalServer>::iterator it=_serverMap->begin(); it!=_serverMap->end(); ++it){
         IcalServer& srv = it.value();
