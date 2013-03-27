@@ -66,7 +66,7 @@ void EditServer::closeEvent(QCloseEvent *event){
         msgBox->exec();
         event->ignore();
     }else{
-        emit endAdd(_server);
+        emit endEdit(_server);
         QWidget::closeEvent(event);
     }
 }

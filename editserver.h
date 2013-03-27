@@ -33,7 +33,6 @@ protected:
     virtual void closeEvent(QCloseEvent *event);
 
 signals:
-    void endEdit();
-    void endAdd(IcalServer *server);
+    void endEdit(IcalServer *server);
 };
 #endif // EDITSERVER_H
