@@ -20,8 +20,8 @@ void EditServer::setConnections(){
 }
 
 void EditServer::addServer(){
-    _server = new IcalServer(QString("A unique name for this server"), QString("http://example.org/"));
-    _server->addCalendar("Your calendar");
+    _server = new IcalServer(QString("A unique name"), QString("http://example.org/"));
+    uiCalendarInput->setText("Calendar name");
     setConnections();
     updateUI();
 }
