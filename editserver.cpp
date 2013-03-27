@@ -35,7 +35,8 @@ void EditServer::editServer(IcalServer *server){
 
 void EditServer::addCalendar(){
     QString newCal = uiCalendarInput->text();
-    if(newCal.length()!=0 && !_server->getCalendars().contains(newCal)){
+    // Calendar name should not be empty and it shouldn't be twice in the list
+    if(!newCal.isEmpty() && !_server->getCalendars().contains(newCal)){
         uiCalendarList->addItem(newCal);
         _server->addCalendar(newCal);
         uiCalendarInput->clear();
