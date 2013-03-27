@@ -1,0 +1,10 @@
+[Translation]
+File=getcal-nct
+Context=Getcal
+
+[Desktop Entry]
+Comment[]=An application to get online calendars
+Exec=getcal
+Icon=getcal/Getcal
+Type=Application
+Name[]=Getcal
