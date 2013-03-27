@@ -37,22 +37,22 @@ pkg [
 
 # These are the source files that get built to create the application
 FORMS=\
-    getcal.ui \
-    editserver.ui \
-    serversettings.ui
+    ui/getcal.ui \
+    ui/editserver.ui \
+    ui/serversettings.ui
 
 HEADERS=\
-    getcal.h \
-    icalserver.h \
-    editserver.h \
-    serversettings.h
+    src/getcal.h \
+    src/icalserver.h \
+    src/editserver.h \
+    src/serversettings.h
 
 SOURCES=\
-    main.cpp\
-    getcal.cpp \
-    icalserver.cpp \
-    editserver.cpp \
-    serversettings.cpp
+    src/main.cpp\
+    src/getcal.cpp \
+    src/icalserver.cpp \
+    src/editserver.cpp \
+    src/serversettings.cpp
 
 # SXE information
 target [
@@ -64,7 +64,7 @@ target [
 # and the path here.
 desktop [
     hint=desktop
-    files=getcal.desktop
+    files=resources/getcal.desktop
     path=/apps/Applications
 ]
 
