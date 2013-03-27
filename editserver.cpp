@@ -35,7 +35,7 @@ void EditServer::editServer(IcalServer *server){
 
 void EditServer::addCalendar(){
     QString newCal = uiCalendarInput->text();
-    if(newCal.length()!=0 && !uiCalendarList->contains(newCal)){
+    if(newCal.length()!=0 && !_server->getCalendars().contains(newCal)){
         uiCalendarList->addItem(newCal);
         _server->addCalendar(newCal);
     }
