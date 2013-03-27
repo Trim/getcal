@@ -1,5 +1,5 @@
 # Don't register swap files and .pro.user
-*.swap
+*.swp
 *.pro.user*
 
 # Directory genearted by compilation
