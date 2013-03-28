@@ -40,6 +40,7 @@ public:
     ~Getcal();
 private slots:
     void removeEvents();
+    void importEvents();
 };
 Q_DECLARE_METATYPE(IcalServer);
 #endif

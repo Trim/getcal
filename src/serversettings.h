@@ -34,6 +34,7 @@ private:
 public:
     ServerSettings(QWidget *parent=0, Qt::WFlags f=0);
     ~ServerSettings();
+    QList<IcalServer> getServers();
 
 public slots:
     void openSettings();

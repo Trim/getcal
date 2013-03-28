@@ -100,3 +100,7 @@ void ServerSettings::readServerSettings(){
     }
     _settings->endGroup();
 }
+
+QList<IcalServer> ServerSettings::getServers(){
+    return _serverMap->values();
+}

@@ -37,6 +37,7 @@ Getcal::Getcal(QWidget *parent, Qt::WFlags f)
     menu->addAction("Settings", winSettings, SLOT(openSettings()));
     menu->addAction("Quit", this, SLOT(close()));
 
+    QObject::connect(uiImportEvents, SIGNAL(clicked()), this, SLOT(importEvents()));
     QObject::connect(uiRemoveEvents, SIGNAL(clicked()), this, SLOT(removeEvents()));
 }
 
@@ -63,6 +64,37 @@ void Getcal::removeEvents(){
         qDebug()<<"Getcal : wait end of remove script.";
     }
     qDebug()<<"Getcal : Process finished with status : "<<removeProcess->exitStatus();
+    uiRemoveEvents->setDisabled(false);
+    uiImportEvents->setDisabled(false);
+}
+
+void Getcal::importEvents(){
+    qDebug()<<"Getcal : will import events.";
+    uiRemoveEvents->setDisabled(true);
+    uiImportEvents->setDisabled(true);
+
+    QList<IcalServer> serverList = winSettings->getServers();
+    QString program = "sync4ics2openmoko.sh";
+
+    foreach(IcalServer serv, serverList){
+        QStringList arguments;
+        arguments << "-s "+ serv.getServerAddress();
+        QString user = serv.getUserName();
+        QString pass = serv.getPassword();
+        if(!user.isEmpty() && !pass.isEmpty()){
+            arguments << "-u"+user;
+            arguments << "-p"+pass;
+        }
+        arguments << serv.getCalendars();
+
+        QProcess *removeProcess = new QProcess(this);
+        removeProcess->start(program, arguments);
+
+        while(removeProcess->waitForFinished()){
+            qDebug()<<"Getcal : wait import of calendars for server : "<<serv.getServerName();
+        }
+        qDebug()<<"Getcal : Process finished with status : "<<removeProcess->exitStatus();
+    }
     uiRemoveEvents->setDisabled(false);
     uiImportEvents->setDisabled(false);
 }
