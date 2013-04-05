@@ -64,7 +64,7 @@ void Getcal::removeEvents(){
     QProcess *removeProcess = new QProcess(this);
     removeProcess->start(program, arguments);
 
-    while(removeProcess->waitForFinished()){
+    if(!removeProcess->waitForFinished(-1)){
         qDebug()<<"Getcal : Failure while waiting end of remove script !";
     }
     qDebug()<<"Getcal : Remove process finished with status : "<<removeProcess->exitStatus();
@@ -98,7 +98,7 @@ void Getcal::importEvents(){
         qDebug()<<"Getcal : Import server "<<serv.getServerName();
         importProcess->start(program, arguments);
 
-        while(removeProcess->waitForFinished()){
+        if(!importProcess->waitForFinished(-1)){
             qDebug()<<"Getcal : Failure while waiting end of import script for server "<<serv.getServerName();
         }
         qDebug()<<"Getcal : Process finished with status : "<<importProcess->exitStatus()<<"for server : "<<serv.getServerName();
