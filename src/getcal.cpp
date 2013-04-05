@@ -53,6 +53,9 @@ void Getcal::removeEvents(){
     qDebug()<<"Getcal : will remove events.";
     uiRemoveEvents->setDisabled(true);
     uiImportEvents->setDisabled(true);
+    // Let application to process draw events, because we'll freeze it after.
+    QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+
     QString program = "remove_events.pl";
     QStringList arguments;
     arguments << QTMOKO_ICALDB;
@@ -64,14 +67,16 @@ void Getcal::removeEvents(){
         qDebug()<<"Getcal : wait end of remove script.";
     }
     qDebug()<<"Getcal : Process finished with status : "<<removeProcess->exitStatus();
-    uiRemoveEvents->setDisabled(false);
-    uiImportEvents->setDisabled(false);
+    uiRemoveEvents->setEnabled(true);
+    uiImportEvents->setEnabled(true);
 }
 
 void Getcal::importEvents(){
     qDebug()<<"Getcal : will import events.";
     uiRemoveEvents->setDisabled(true);
     uiImportEvents->setDisabled(true);
+    // Let application to process draw events, because we'll freeze it after.
+    QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
     QList<IcalServer> serverList = winSettings->getServers();
     QString program = "sync4ics2openmoko.sh";
@@ -95,6 +100,6 @@ void Getcal::importEvents(){
         }
         qDebug()<<"Getcal : Process finished with status : "<<removeProcess->exitStatus();
     }
-    uiRemoveEvents->setDisabled(false);
-    uiImportEvents->setDisabled(false);
+    uiRemoveEvents->setEnabled(true);
+    uiImportEvents->setEnabled(true);
 }
