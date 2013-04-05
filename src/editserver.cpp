@@ -25,6 +25,7 @@ void EditServer::addServer(){
     uiCalendarInput->setText("Calendar name");
     setConnections();
     updateUI();
+    uiServerNameLine->setReadOnly(false);
 }
 
 void EditServer::editServer(IcalServer *server){
@@ -32,6 +33,7 @@ void EditServer::editServer(IcalServer *server){
     _server = new IcalServer(*server);
     setConnections();
     updateUI();
+    uiServerNameLine->setReadOnly(true); // Prevent modification for server name because it's not really well supported right now
 }
 
 void EditServer::addCalendar(){
