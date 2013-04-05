@@ -94,9 +94,9 @@ void Getcal::importEvents(){
         }
         arguments << serv.getCalendars();
 
-        QProcess *removeProcess = new QProcess(this);
-        removeProcess->start(program, arguments);
+        QProcess *importProcess = new QProcess(this);
         qDebug()<<"Getcal : Import server "<<serv.getServerName();
+        importProcess->start(program, arguments);
 
         while(removeProcess->waitForFinished()){
             qDebug()<<"Getcal : Failure while waiting end of import script for server "<<serv.getServerName();
