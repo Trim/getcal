@@ -50,7 +50,8 @@ Getcal::~Getcal()
 }
 
 void Getcal::removeEvents(){
-    qDebug()<<"Getcal : will remove events.";
+    qDebug()<<"Getcal : will remove events...";
+
     uiRemoveEvents->setDisabled(true);
     uiImportEvents->setDisabled(true);
     // Let application to process draw events, because we'll freeze it after.
@@ -64,15 +65,16 @@ void Getcal::removeEvents(){
     removeProcess->start(program, arguments);
 
     while(removeProcess->waitForFinished()){
-        qDebug()<<"Getcal : wait end of remove script.";
+        qDebug()<<"Getcal : Failure while waiting end of remove script !";
     }
-    qDebug()<<"Getcal : Process finished with status : "<<removeProcess->exitStatus();
+    qDebug()<<"Getcal : Remove process finished with status : "<<removeProcess->exitStatus();
     uiRemoveEvents->setEnabled(true);
     uiImportEvents->setEnabled(true);
 }
 
 void Getcal::importEvents(){
-    qDebug()<<"Getcal : will import events.";
+    qDebug()<<"Getcal : will import events for every server...";
+
     uiRemoveEvents->setDisabled(true);
     uiImportEvents->setDisabled(true);
     // Let application to process draw events, because we'll freeze it after.
@@ -94,11 +96,12 @@ void Getcal::importEvents(){
 
         QProcess *removeProcess = new QProcess(this);
         removeProcess->start(program, arguments);
+        qDebug()<<"Getcal : Import server "<<serv.getServerName();
 
         while(removeProcess->waitForFinished()){
-            qDebug()<<"Getcal : wait import of calendars for server : "<<serv.getServerName();
+            qDebug()<<"Getcal : Failure while waiting end of import script for server "<<serv.getServerName();
         }
-        qDebug()<<"Getcal : Process finished with status : "<<removeProcess->exitStatus();
+        qDebug()<<"Getcal : Process finished with status : "<<importProcess->exitStatus()<<"for server : "<<serv.getServerName();
     }
     uiRemoveEvents->setEnabled(true);
     uiImportEvents->setEnabled(true);
