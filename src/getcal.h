@@ -27,6 +27,7 @@
 #include <QDebug>
 #include <QString>
 #include <QProcess>
+#include <QProgressBar>
 
 #define QTMOKO_ICALDB "/home/root/Applications/Qtopia/qtopia_db.sqlite"
 

@@ -75,15 +75,24 @@ void Getcal::removeEvents(){
 void Getcal::importEvents(){
     qDebug()<<"Getcal : will import events for every server...";
 
+    QList<IcalServer> serverList = winSettings->getServers();
+    int totalServer = serverList.size();
+    QProgressBar * progBar = new QProgressBar();
+    progBar->setMinimum(0);
+    progBar->setMaximum(totalServer);
+    uiMainLayout->addWidget(progBar);
+
     uiRemoveEvents->setDisabled(true);
     uiImportEvents->setDisabled(true);
     // Let application to process draw events, because we'll freeze it after.
     QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
-    QList<IcalServer> serverList = winSettings->getServers();
     QString program = "sync4ics2openmoko.sh";
 
-    foreach(IcalServer serv, serverList){
+    for(int i=0;i<totalServer;++i){
+        IcalServer serv = serverList[i];
+        progBar->setValue(i);
+
         QStringList arguments;
         arguments << "-s "+ serv.getServerAddress();
         QString user = serv.getUserName();
@@ -103,6 +112,7 @@ void Getcal::importEvents(){
         }
         qDebug()<<"Getcal : Process finished with status : "<<importProcess->exitStatus()<<"for server : "<<serv.getServerName();
     }
+    delete progBar;
     uiRemoveEvents->setEnabled(true);
     uiImportEvents->setEnabled(true);
 }
