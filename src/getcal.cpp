@@ -67,40 +67,23 @@ void Getcal::importEvents(){
     qDebug()<<"Getcal : will import events for every server...";
     disableUi();
 
-    QList<IcalServer> serverList = winSettings->getServers();
-    int totalServer = serverList.size();
-    QProgressBar * progBar = new QProgressBar();
+    serverList = winSettings->getServers();
+    totalServer = serverList.size();
+
+    progBar = new QProgressBar();
     progBar->setMinimum(0);
     progBar->setMaximum(totalServer);
     uiMainLayout->addWidget(progBar);
-
-    QString program = "sync4ics2openmoko.sh";
-
-    for(int i=0;i<totalServer;++i){
-        IcalServer serv = serverList[i];
-        progBar->setValue(i);
-
-        QStringList arguments;
-        arguments << "-s "+ serv.getServerAddress();
-        QString user = serv.getUserName();
-        QString pass = serv.getPassword();
-        if(!user.isEmpty() && !pass.isEmpty()){
-            arguments << "-u"+user;
-            arguments << "-p"+pass;
-        }
-        arguments << serv.getCalendars();
-
-        QProcess *importProcess = new QProcess(this);
-        qDebug()<<"Getcal : Import server "<<serv.getServerName();
-        importProcess->start(program, arguments);
-
-        if(!importProcess->waitForFinished(-1)){
-            qDebug()<<"Getcal : Failure while waiting end of import script for server "<<serv.getServerName();
-        }
-        qDebug()<<"Getcal : Process finished with status : "<<importProcess->exitStatus()<<"for server : "<<serv.getServerName();
+    if(totalServer>0){
+        currentServerImport=0;
+        importServer();
+    }else{
+        QMessageBox* msgBox = new QMessageBox(this);
+        msgBox->setText("No server has been configured, so nothing has been done.\nPlease create at least one server.");
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->exec();
+        enableUi();
     }
-    delete progBar;
-    enableUi();
 }
 
 void Getcal::disableUi(){
@@ -126,6 +109,55 @@ void Getcal::endRemoveEvents(int exitCode, QProcess::ExitStatus exitStatus){
     }
     case QProcess::NormalExit:{
         enableUi();
+        break;}
+    default:{
+        enableUi();
+        break;
+    }
+    }
+}
+
+void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
+    switch(exitStatus){
+    case QProcess::CrashExit:{
+        QMessageBox* msgBox = new QMessageBox(this);
+        msgBox->setText("An error occured while importing events from server CURRENT_INDEX.\nPlease try again.");
+        msgBox->setIcon(QMessageBox::Warning);
+        msgBox->exec();
+        enableUi();
+        break;
+    }
+    case QProcess::NormalExit:{
+        if(currentServerImport<totalServer && currentServerImport>=0){
+            IcalServer serv = serverList[currentServerImport];
+            progBar->setValue(currentServerImport);
+
+            QString program = "sync4ics2openmoko.sh";
+            QStringList arguments;
+            arguments << "-s "+ serv.getServerAddress();
+            QString user = serv.getUserName();
+            QString pass = serv.getPassword();
+            if(!user.isEmpty() && !pass.isEmpty()){
+                arguments << "-u"+user;
+                arguments << "-p"+pass;
+            }
+
+            if(!serv.getCalendars().isEmpty()){
+                arguments << serv.getCalendars();
+            }
+
+            QProcess *importProcess = new QProcess(this);
+            qDebug()<<"Getcal : Import server "<<serv.getServerName();
+            ++currentServerImport;
+            QObject::connect(importProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
+                             this, SLOT(importServer(int, QProcess::ExitStatus)));
+            importProcess->startDetached(program, arguments);
+
+            qDebug()<<"Getcal : Process finished with status : "<<importProcess->exitStatus()<<"for server : "<<serv.getServerName();
+        }else{
+            delete progBar;
+            enableUi();
+        }
         break;}
     default:{
         enableUi();

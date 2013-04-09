@@ -39,6 +39,12 @@ private:
     ServerSettings *winSettings;
     void disableUi();
     void enableUi();
+
+    // Import specific variables
+    QList<IcalServer> serverList;
+    int totalServer;
+    int currentServerImport;
+    QProgressBar * progBar;
 public:
     Getcal( QWidget *parent = 0, Qt::WFlags f = 0 );
     ~Getcal();
@@ -46,6 +52,7 @@ private slots:
     void removeEvents();
     void endRemoveEvents(int exitCode, QProcess::ExitStatus exitStatus);
     void importEvents();
+    void importServer(int exitCode=0, QProcess::ExitStatus exitStatus=QProcess::NormalExit);
 };
 Q_DECLARE_METATYPE(IcalServer);
 #endif
