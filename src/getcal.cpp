@@ -58,12 +58,9 @@ void Getcal::removeEvents(){
     arguments << QTMOKO_ICALDB;
 
     QProcess *removeProcess = new QProcess(this);
-    removeProcess->start(program, arguments);
-
-    if(!removeProcess->waitForFinished(-1)){
-        qDebug()<<"Getcal : Failure while waiting end of remove script !";
-    }
-    qDebug()<<"Getcal : Remove process finished with status : "<<removeProcess->exitStatus();
+    QObject::connect(removeProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
+                     this, SLOT(endRemoveEvents(int,QProcess::ExitStatus)));
+    removeProcess->startDetached(program, arguments);
 }
 
 void Getcal::importEvents(){
@@ -115,4 +112,24 @@ void Getcal::disableUi(){
 void Getcal::enableUi(){
     uiRemoveEvents->setEnabled(true);
     uiImportEvents->setEnabled(true);
+}
+
+void Getcal::endRemoveEvents(int exitCode, QProcess::ExitStatus exitStatus){
+    switch(exitStatus){
+    case QProcess::CrashExit:{
+        QMessageBox* msgBox = new QMessageBox(this);
+        msgBox->setText("An error occured while removing events.\nPlease try again.");
+        msgBox->setIcon(QMessageBox::Warning);
+        msgBox->exec();
+        enableUi();
+        break;
+    }
+    case QProcess::NormalExit:{
+        enableUi();
+        break;}
+    default:{
+        enableUi();
+        break;
+    }
+    }
 }

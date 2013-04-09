@@ -28,6 +28,7 @@
 #include <QString>
 #include <QProcess>
 #include <QProgressBar>
+#include <QMessageBox>
 
 #define QTMOKO_ICALDB "/home/root/Applications/Qtopia/qtopia_db.sqlite"
 
@@ -43,6 +44,7 @@ public:
     ~Getcal();
 private slots:
     void removeEvents();
+    void endRemoveEvents(int exitCode, QProcess::ExitStatus exitStatus);
     void importEvents();
 };
 Q_DECLARE_METATYPE(IcalServer);
