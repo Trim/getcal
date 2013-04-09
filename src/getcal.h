@@ -36,6 +36,8 @@ class Getcal : public QWidget, public Ui_Getcal
     Q_OBJECT
 private:
     ServerSettings *winSettings;
+    void disableUi();
+    void enableUi();
 public:
     Getcal( QWidget *parent = 0, Qt::WFlags f = 0 );
     ~Getcal();

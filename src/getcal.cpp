@@ -51,11 +51,7 @@ Getcal::~Getcal()
 
 void Getcal::removeEvents(){
     qDebug()<<"Getcal : will remove events...";
-
-    uiRemoveEvents->setDisabled(true);
-    uiImportEvents->setDisabled(true);
-    // Let application to process draw events, because we'll freeze it after.
-    QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+    disableUi();
 
     QString program = "remove_events.pl";
     QStringList arguments;
@@ -68,12 +64,11 @@ void Getcal::removeEvents(){
         qDebug()<<"Getcal : Failure while waiting end of remove script !";
     }
     qDebug()<<"Getcal : Remove process finished with status : "<<removeProcess->exitStatus();
-    uiRemoveEvents->setEnabled(true);
-    uiImportEvents->setEnabled(true);
 }
 
 void Getcal::importEvents(){
     qDebug()<<"Getcal : will import events for every server...";
+    disableUi();
 
     QList<IcalServer> serverList = winSettings->getServers();
     int totalServer = serverList.size();
@@ -81,11 +76,6 @@ void Getcal::importEvents(){
     progBar->setMinimum(0);
     progBar->setMaximum(totalServer);
     uiMainLayout->addWidget(progBar);
-
-    uiRemoveEvents->setDisabled(true);
-    uiImportEvents->setDisabled(true);
-    // Let application to process draw events, because we'll freeze it after.
-    QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
     QString program = "sync4ics2openmoko.sh";
 
@@ -113,6 +103,16 @@ void Getcal::importEvents(){
         qDebug()<<"Getcal : Process finished with status : "<<importProcess->exitStatus()<<"for server : "<<serv.getServerName();
     }
     delete progBar;
+    enableUi();
+}
+
+void Getcal::disableUi(){
+    uiRemoveEvents->setDisabled(true);
+    uiImportEvents->setDisabled(true);
+    // Let application to process draw events, because we'll freeze it after.
+    //QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+}
+void Getcal::enableUi(){
     uiRemoveEvents->setEnabled(true);
     uiImportEvents->setEnabled(true);
 }
