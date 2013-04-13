@@ -152,8 +152,6 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
             QObject::connect(importProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                              this, SLOT(importServer(int, QProcess::ExitStatus)));
             importProcess->startDetached(program, arguments);
-
-            qDebug()<<"Getcal : Process finished with status : "<<importProcess->exitStatus()<<"for server : "<<serv.getServerName();
         }else{
             delete progBar;
             enableUi();

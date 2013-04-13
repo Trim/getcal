@@ -1,17 +1,14 @@
 #include "icalserver.h"
 
 IcalServer::IcalServer(const IcalServer& icalSrv){
-    qDebug() << "Creating a new IcalServer by constructor";
     _serverName = icalSrv.getServerName();
     _serverAddress = icalSrv.getServerAddress();
     _userName = icalSrv.getUserName();
     _userPassword = icalSrv.getPassword();
     _calendars =  new QStringList(icalSrv.getCalendars());
-    qDebug() << "(creation finished)";
 }
 
 IcalServer& IcalServer::operator=(const IcalServer& icalSrv) {
-    qDebug() << "Creating a new IcalServer by = sign";
     if ( this == &icalSrv ) {
         return *this; //Self assignment : nothing to do
     }
@@ -21,7 +18,6 @@ IcalServer& IcalServer::operator=(const IcalServer& icalSrv) {
     _userName = icalSrv.getUserName();
     _userPassword = icalSrv.getPassword();
     _calendars =  new QStringList(icalSrv.getCalendars());
-    qDebug() << "(creation finished)";
     return *this;
 }
 
