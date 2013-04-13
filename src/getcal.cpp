@@ -60,7 +60,7 @@ void Getcal::removeEvents(){
     QProcess *removeProcess = new QProcess(this);
     QObject::connect(removeProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                      this, SLOT(endRemoveEvents(int,QProcess::ExitStatus)));
-    removeProcess->startDetached(program, arguments);
+    removeProcess->start(program, arguments);
 }
 
 void Getcal::importEvents(){
@@ -155,7 +155,7 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
             ++currentServerImport;
             QObject::connect(importProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                              this, SLOT(importServer(int, QProcess::ExitStatus)));
-            importProcess->startDetached(program, arguments);
+            importProcess->start(program, arguments);
         }else{
             delete progBar;
             enableUi();
