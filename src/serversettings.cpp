@@ -21,7 +21,6 @@ ServerSettings::ServerSettings(QWidget *parent, Qt::WFlags f) :
 
     QObject::connect(this, SIGNAL(editClickedServer(IcalServer *)), _editServer, SLOT(editServer(IcalServer*)));
     QObject::connect(_editServer, SIGNAL(endEdit(IcalServer*)), this, SLOT(setServer(IcalServer*)));
-    QObject::connect(uiSaveConfigButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 }
 
 ServerSettings::~ServerSettings(){
@@ -79,7 +78,7 @@ void ServerSettings::saveSettings(){
         _settings->endGroup();
     }
     _settings->endGroup();
-    qDebug()<< "Settings saved";
+    qDebug()<< "ServerSettings : Settings saved.";
 }
 
 /* Read all server from settings */

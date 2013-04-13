@@ -91,9 +91,8 @@ void Getcal::disableUi(){
     uiImportEvents->setDisabled(true);
     QMenu *menu = QSoftMenuBar::menuFor(this);
     menu->setDisabled(true);
-    // Let application to process draw events, because we'll freeze it after.
-    //QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 }
+
 void Getcal::enableUi(){
     uiRemoveEvents->setEnabled(true);
     uiImportEvents->setEnabled(true);
@@ -121,11 +120,18 @@ void Getcal::endRemoveEvents(int exitCode, QProcess::ExitStatus exitStatus){
     }
 }
 
+/* This method is a recursive function which use the values currentServerImport and the number of
+ * configured servers (totalServer) to determine its end. Please initalize currentServerImport before
+ * you use this method.
+ */
 void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
     switch(exitStatus){
     case QProcess::CrashExit:{
         QMessageBox* msgBox = new QMessageBox(this);
-        msgBox->setText("An error occured while importing events from server CURRENT_INDEX.\nPlease try again.");
+        QString* message = new QString("An error occured while importing events from server ");
+        message->append(serverList[currentServerImport].getServerName());
+        message->append("\nPlease try again.");
+        msgBox->setText(*message);
         msgBox->setIcon(QMessageBox::Warning);
         msgBox->exec();
         enableUi();

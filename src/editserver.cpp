@@ -68,7 +68,7 @@ void EditServer::updateUI(){
 }
 
 void EditServer::closeEvent(QCloseEvent *event){
-    qDebug()<<"EditServer : will emit signal endEdit with server : "<<_server->getServerName();
+    qDebug()<<"EditServer : end of edition for server : "<<_server->getServerName();
     if(_server->getServerName().isEmpty()){
         QMessageBox* msgBox = new QMessageBox(this);
         msgBox->setText("You have to enter a name for this server.");

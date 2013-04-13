@@ -41,13 +41,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="uiSaveConfigButton">
-       <property name="text">
-        <string>Save</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
