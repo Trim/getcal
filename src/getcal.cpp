@@ -89,12 +89,16 @@ void Getcal::importEvents(){
 void Getcal::disableUi(){
     uiRemoveEvents->setDisabled(true);
     uiImportEvents->setDisabled(true);
+    QMenu *menu = QSoftMenuBar::menuFor(this);
+    menu->setDisabled(true);
     // Let application to process draw events, because we'll freeze it after.
     //QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 }
 void Getcal::enableUi(){
     uiRemoveEvents->setEnabled(true);
     uiImportEvents->setEnabled(true);
+    QMenu *menu = QSoftMenuBar::menuFor(this);
+    menu->setEnabled(true);
 }
 
 void Getcal::endRemoveEvents(int exitCode, QProcess::ExitStatus exitStatus){
