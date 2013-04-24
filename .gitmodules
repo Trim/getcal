@@ -1,0 +1,3 @@
+[submodule "3rdparty/qtmoko-ics2qtcal"]
+	path = 3rdparty/qtmoko-ics2qtcal
+	url = git@github.com:Trim/qtmoko-ics2qtcal.git
