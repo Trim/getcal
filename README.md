@@ -25,7 +25,7 @@ Although a possible improvement is to remove use of shell script and download fi
 
 How to install Getcal ?
 =======================
-See [Installation](./INSTALLATION.md) file.
+See [Installation](./INSTALL.md) file.
 
 How to configure Getcal ?
 =========================
