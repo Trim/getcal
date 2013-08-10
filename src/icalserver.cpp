@@ -33,7 +33,14 @@ IcalServer::IcalServer(QString serverName,
                        QString userName,
                        QString userPassword,
                        QStringList calendars)
-    : IcalServer(serverName, serverAddress){
+    // When QtMoko will work on Debian/Jessie with g++-4.8 we'll be able to replace the next four lines by calling the other constructor (see C++11) :
+    //: IcalServer(serverName, serverAddress){
+    {
+    _serverName = serverName;
+    _serverAddress = serverAddress;
+    _calendars = new QStringList();
+    // (stop replace)
+
     this->setUserName(userName);
     this->setUserPass(userPassword);
     this->setCalendars(calendars);
