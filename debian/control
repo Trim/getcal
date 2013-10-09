@@ -1,0 +1,13 @@
+Source: getcal
+Priority: optional
+Maintainer: Adrien Dorsaz <adrien@adorsaz.ch> 
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+Homepage: http://redmine.adorsaz.ch/projects/getcal_
+Vcs-Git: git://adorsaz.ch/getcal.git
+Vcs-Browser: https://redmine.adorsaz.ch/projects/getcal_/repository
+
+Package: getcal
+Architecture: any
+Depends: qtmoko-ics2qtcal (>=0.7.3-1)
+Description: GUI interface for qtmoko-ics2qtcal
