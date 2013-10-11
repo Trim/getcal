@@ -1,6 +1,7 @@
 #include "icalserver.h"
 
-IcalServer::IcalServer(const IcalServer& icalSrv){
+IcalServer::IcalServer(const IcalServer& icalSrv)
+    : QObject() {
     _serverName = icalSrv.getServerName();
     _serverAddress = icalSrv.getServerAddress();
     _userName = icalSrv.getUserName();
