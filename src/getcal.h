@@ -26,6 +26,7 @@ private:
     int totalServer;
     int currentServerImport;
     QProgressBar * progBar;
+    QProcessEnvironment mokoEnv;
 public:
     Getcal( QWidget *parent = 0, Qt::WFlags f = 0 );
     ~Getcal();

@@ -1,15 +1,36 @@
 <html>
-<h1>Example</h1>
+<h1>Introduction</h1>
+<p>The configuration of servers in getcal is the same than ics2qtcal.<br/>
+The main idea is to get ics files (they can end by .ics or not) from a server passing some parameters to server.</p>
 
-<p>This is the help for the Example program.
+<h1>Username and Password</h1>
+<p>To download these files, you may need to enter a <em>user name</em> and a <em>password</em>. These parameters are <em>not</em> mandatory.</p>
 
-<p>To use this application:
+<h1>Server URL parameter and calendars</h1>
+<p>There's a big probability that calendars (with .ics extension or not) files hosted on the same server will have a big part of their URL which is common.<br/>
+The idea of <em>Server URL</em> is to place in it this big common part of URL and to save in <em>Calendars</em> the end of the URL which isn't shared.</p>
 
+<h1>Example : one server with one user</h1>
+<p>For example, if you use the Davical server on example.org you can have some calendars with this urls :</p>
+<ol> 
+<li>http://cal.example.org/davical.php/user1/Personnel</li>
+<li>http://cal.example.org/davical.php/user1/Job.ics</li>
+<li>http://cal.example.org/davical.php/user1/Birthdays</li>
+</ol>
+<p>In this case you'll write "http://cal.example.org/davical.php/user1" in <em>server URL</em> and you'll add calendars :</p>
 <ol>
- <li>Press the <img width=12 height=12 src=":image/example/Example"> icon in the Qt Extended launcher.
- <li>Read the label.
- <li>Press the button.
- <li>Read the source code provided.
+<li>Personnel</li>
+<li>Job.ics</li>
+<li>Birthdays</li>
 </ol>
 
-Now you know how to make a Qt Extended application!
+<h1>Example : one server with two users sharing calendars</h1>
+
+<p>Let say that there's another user, user2, which have some calendars on the same Davical server and that user1 can access user2's calendars within the server.<br/>
+In this case, instead of creating two servers with same user and password, you can set <em>server URL</em> parameter as this : "http://cal.example.org/davical.php/" and add calendars :</p>
+<ol>
+<li>user1/Personnel (so the end of URL)</li>
+<li>user1/Job.ics</li>
+<li>user1/Birthdays</li>
+<li>_user2_/Birthdays (as it's the end of URL and user1 have access to user2's calendars)</li>
+<li>_user2_/Personnel</li>

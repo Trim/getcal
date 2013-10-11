@@ -1,6 +1,7 @@
 #include "icalserver.h"
 
-IcalServer::IcalServer(const IcalServer& icalSrv){
+IcalServer::IcalServer(const IcalServer& icalSrv)
+    : QObject() {
     _serverName = icalSrv.getServerName();
     _serverAddress = icalSrv.getServerAddress();
     _userName = icalSrv.getUserName();
@@ -95,6 +96,11 @@ void IcalServer::setServerName(QString name){
 }
 
 void IcalServer::setServerAddress(QString address){
+    // As qtmoko-ics2qtcal add the '/' at the end of server address, we remove it here
+    if(address.endsWith('/')){
+        address.remove(address.lastIndexOf("/"));
+    }
+
     _serverAddress=address;
 }
 
@@ -107,5 +113,10 @@ void IcalServer::setUserPass(QString userPassword){
 }
 
 void IcalServer::addCalendar(QString calendar){
+    // As qtmoko-ics2qtcal add the '/' at the beginning of calendar address, we remove it here
+    if(calendar.startsWith('/')){
+        calendar.remove(calendar.indexOf('/'));
+    }
+
     _calendars->append(calendar);
 }

@@ -17,6 +17,8 @@ Getcal::Getcal(QWidget *parent, Qt::WFlags f)
     winSettings = new ServerSettings(parent, f);
     menu->addAction("Settings", winSettings, SLOT(openSettings()));
     menu->addAction("Quit", this, SLOT(close()));
+    mokoEnv = QProcessEnvironment::systemEnvironment();
+    mokoEnv.insert("PATH", mokoEnv.value("PiATH") + ":/opt/qtmoko/bin");
 
     QObject::connect(uiImportEvents, SIGNAL(clicked()), this, SLOT(importEvents()));
     QObject::connect(uiRemoveEvents, SIGNAL(clicked()), this, SLOT(removeEvents()));
@@ -41,6 +43,7 @@ void Getcal::removeEvents(){
     QProcess *removeProcess = new QProcess(this);
     QObject::connect(removeProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                      this, SLOT(endRemoveEvents(int,QProcess::ExitStatus)));
+    removeProcess->setProcessEnvironment(mokoEnv);
     removeProcess->start(program, arguments);
 }
 
@@ -142,6 +145,7 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
             ++currentServerImport;
             QObject::connect(importProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                              this, SLOT(importServer(int, QProcess::ExitStatus)));
+            importProcess->setProcessEnvironment(mokoEnv);
             importProcess->start(program, arguments);
         }else{
             delete progBar;
