@@ -15,7 +15,6 @@ class EditServer : public QWidget, public Ui_EditServer
 private:
     IcalServer *_server;
     bool _editionMode;
-    void updateUI();
     void setConnections();
 
 public:
@@ -27,6 +26,7 @@ public slots:
     void editServer(IcalServer *server);
 
 private slots:
+    void updateUI();
     void addCalendar();
     void deleteCalendar();
 

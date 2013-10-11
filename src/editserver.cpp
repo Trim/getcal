@@ -13,9 +13,17 @@ EditServer::~EditServer(){
 
 void EditServer::setConnections(){
     QObject::connect(uiServerNameLine, SIGNAL(textChanged(QString)), _server, SLOT(setServerName(QString)));
+    QObject::connect(uiServerNameLine, SIGNAL(textChanged(QString)), this, SLOT(updateUI()));
+
     QObject::connect(uiServerAddressLine, SIGNAL(textChanged(QString)), _server, SLOT(setServerAddress(QString)));
+    QObject::connect(uiServerAddressLine, SIGNAL(textChanged(QString)), this, SLOT(updateUI()));
+
     QObject::connect(uiUserNameLine, SIGNAL(textChanged(QString)), _server, SLOT(setUserName(QString)));
+    QObject::connect(uiUserNameLine, SIGNAL(textChanged(QString)), this, SLOT(updateUI()));
+
     QObject::connect(uiUserPassLine, SIGNAL(textChanged(QString)), _server, SLOT(setUserPass(QString)));
+    QObject::connect(uiUserPassLine, SIGNAL(textChanged(QString)), this, SLOT(updateUI()));
+
     QObject::connect(uiAddCalendar, SIGNAL(clicked()), this, SLOT(addCalendar()));
     QObject::connect(uiDeleteCalendar, SIGNAL(clicked()), this, SLOT(deleteCalendar()));
 }
@@ -40,9 +48,9 @@ void EditServer::addCalendar(){
     QString newCal = uiCalendarInput->text();
     // Calendar name should not be empty and it shouldn't be twice in the list
     if(!newCal.isEmpty() && !_server->getCalendars().contains(newCal)){
-        uiCalendarList->addItem(newCal);
         _server->addCalendar(newCal);
         uiCalendarInput->clear();
+        updateUI();
     }
 }
 
