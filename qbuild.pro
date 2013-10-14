@@ -31,7 +31,7 @@ pkg [
     name=getcal
     desc="Get your calendars"
     license=GPLv3
-    version=1.0
+    version=1.1
     maintainer="Adrien Dorsaz <adrien@adorsaz.ch>"
 ]
 
