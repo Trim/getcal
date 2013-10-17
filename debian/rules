@@ -12,7 +12,7 @@ clean:
 	rm -f getcal
 
 binary: build
-	../../../../../bin/qbuild
+	../../../../../build/bin/qbuild packages
 	mkdir -p debian/tmp/opt/qtmoko
 	cd debian/tmp/opt/qtmoko && tar xzvpf ../../../../pkg/*
 	cd debian/tmp/opt/qtmoko && tar xzvpf data.tar.gz
