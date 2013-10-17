@@ -9,7 +9,7 @@ clean:
 	rm -rf .moc
 	rm -rf .uic
 	rm -rf .obj
-	rm getcal
+	rm -f getcal
 
 binary: build
 	../../../../../bin/qbuild
