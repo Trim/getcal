@@ -36,7 +36,7 @@ void Getcal::removeEvents(){
     qDebug()<<"Getcal : will remove events...";
     disableUi();
 
-    QString program = "remove_events.pl";
+    QString program = "deleteqtcalappointments.pl";
     QStringList arguments;
     arguments << QTMOKO_ICALDB;
 
