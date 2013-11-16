@@ -1,8 +1,9 @@
 Source: getcal
+Section: qtmoko
 Priority: optional
 Maintainer: Adrien Dorsaz <adrien@adorsaz.ch> 
-Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.8.4
+Build-Depends: debhelper (>= 7.0.50~),libc6 (>=2.13-38)
+Standards-Version: 3.9.4
 Homepage: http://redmine.adorsaz.ch/projects/getcal_
 Vcs-Git: git://adorsaz.ch/getcal.git
 Vcs-Browser: https://redmine.adorsaz.ch/projects/getcal_/repository
@@ -11,3 +12,5 @@ Package: getcal
 Architecture: any
 Depends: qtmoko-ics2qtcal (>=0.7.3-1)
 Description: GUI interface for qtmoko-ics2qtcal
+ Getcal is a simple GUI to configure and save the configuration of qtmoko-ics2qtcal simply and
+ run it without the need to specify every time your configurations.

@@ -1,3 +1,9 @@
+getcal (1.1-2) unstable; urgency=low
+
+  * Update debian/control and fix debian/rules
+
+ -- Adrien Dorsaz <adrien@adorsaz.ch>  Tue, 13 Oct 2013 18:05:00 +0200
+
 getcal (1.1-1) unstable; urgency=low
 
   * Update from master : fix PATH env, adjust server/calendars strings, remove a warn compilation
