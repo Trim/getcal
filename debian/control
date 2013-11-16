@@ -2,7 +2,7 @@ Source: getcal
 Section: qtmoko
 Priority: optional
 Maintainer: Adrien Dorsaz <adrien@adorsaz.ch> 
-Build-Depends: debhelper (>= 7.0.50~),libc6 (>=2.13-38)
+Build-Depends: debhelper (>= 7.0.50~),libc6 (>=2.11.3-4)
 Standards-Version: 3.9.4
 Homepage: http://redmine.adorsaz.ch/projects/getcal_
 Vcs-Git: git://adorsaz.ch/getcal.git
