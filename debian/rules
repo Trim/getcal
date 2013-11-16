@@ -4,7 +4,9 @@ build:
 
 clean:
 	rm -rf debian/tmp
+	rm -rf ../../../../../build/src/3rdparty/applications/getcal/pkg
 	rm -f debian/files
+	rm -f debian/getcal.debhelper.log
 
 binary: build
 	../../../../../build/bin/qbuild packages
