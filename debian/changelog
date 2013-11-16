@@ -1,0 +1,11 @@
+getcal (1.1-1) unstable; urgency=low
+
+  * Update from master : fix PATH env, adjust server/calendars strings, remove a warn compilation
+
+ -- Adrien Dorsaz <adrien@adorsaz.ch>  Tue, 13 Oct 2013 18:05:00 +0200
+
+getcal (1.0-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Adrien Dorsaz <adrien@adorsaz.ch>  Tue, 08 Oct 2013 23:59:56 +0200

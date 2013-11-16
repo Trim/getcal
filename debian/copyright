@@ -1,0 +1,27 @@
+This work was packaged for Debian by:
+
+    Adrien Dorsaz <adrien@adorsaz.ch> on Tue, 08 Oct 2013 23:59:56 +0200
+
+It was downloaded from:
+
+    git://adorsaz.ch:getcal.git
+
+Upstream Author(s):
+
+    Adrien Dorsaz <adrien@adorsaz.ch>
+
+Copyright:
+
+    Copyright (C) 2009 Trolltech ASA. <info@qtextended.org>
+    Copyright (C) 2013 Adrien Dorsaz <adrien@adorsaz.ch> 
+
+License:
+
+    GPL-3
+
+The Debian packaging is:
+
+    Copyright (C) 2013 Adrien Dorsaz <adrien@adorsaz.ch>
+
+and is licensed under the GPL version 3,
+see "/usr/share/common-licenses/GPL-3".
