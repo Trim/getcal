@@ -137,7 +137,7 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
             }
 
             if(!serv.getCalendars().isEmpty()){
-                arguments << "'"+serv.getCalendars()+"'";
+                arguments << serv.getCalendars();
             }
 
             QProcess *importProcess = new QProcess(this);
