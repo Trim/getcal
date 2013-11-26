@@ -7,11 +7,6 @@ clean:
 	rm -rf ../../../../../build/src/3rdparty/applications/getcal/pkg
 	rm -f debian/files
 	rm -f debian/getcal.debhelper.log
-	rm -rf pkg
-	rm -rf .moc
-	rm -rf .uic
-	rm -rf .obj
-	rm -f getcal
 
 binary: build
 	../../../../../build/bin/qbuild packages
