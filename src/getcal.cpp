@@ -18,7 +18,7 @@ Getcal::Getcal(QWidget *parent, Qt::WFlags f)
     menu->addAction("Settings", winSettings, SLOT(openSettings()));
     menu->addAction("Quit", this, SLOT(close()));
     mokoEnv = QProcessEnvironment::systemEnvironment();
-    mokoEnv.insert("PATH", mokoEnv.value("PiATH") + ":/opt/qtmoko/bin");
+    mokoEnv.insert("PATH", mokoEnv.value("PATH") + ":/opt/qtmoko/bin");
 
     QObject::connect(uiImportEvents, SIGNAL(clicked()), this, SLOT(importEvents()));
     QObject::connect(uiRemoveEvents, SIGNAL(clicked()), this, SLOT(removeEvents()));
