@@ -128,12 +128,12 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
 
             QString program = "sync4ics2openmoko.sh";
             QStringList arguments;
-            arguments << "-s'"+serv.getServerAddress()+"'";
+            arguments << "-s "+ serv.getServerAddress();
             QString user = serv.getUserName();
             QString pass = serv.getPassword();
             if(!user.isEmpty() && !pass.isEmpty()){
-                arguments << "-u'"+user+"'";
-                arguments << "-p'"+pass+"'";
+                arguments << "-u"+user;
+                arguments << "-p"+pass;
             }
             arguments << "-v";
 
