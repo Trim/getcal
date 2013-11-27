@@ -135,17 +135,20 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
                 arguments << "-u'"+user+"'";
                 arguments << "-p'"+pass+"'";
             }
+            arguments << "-v";
 
             if(!serv.getCalendars().isEmpty()){
                 arguments << serv.getCalendars();
             }
 
             QProcess *importProcess = new QProcess(this);
-            qDebug()<<"Getcal : Import server "<<serv.getServerName();
+            qDebug()<<"Getcal : Import server "<<serv.getServerName()<<" with args "<<arguments<<" and sync app "<<program;
             ++currentServerImport;
             QObject::connect(importProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                              this, SLOT(importServer(int, QProcess::ExitStatus)));
             importProcess->setProcessEnvironment(mokoEnv);
+            importProcess->setStandardErrorFile("/tmp/getcal_sync.err");
+            importProcess->setStandardOutputFile("/tmp/getcal_sync.log");
             importProcess->start(program, arguments);
         }else{
             delete progBar;
