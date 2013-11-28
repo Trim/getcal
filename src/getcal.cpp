@@ -142,13 +142,13 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
             }
 
             QProcess *importProcess = new QProcess(this);
-            qDebug()<<"Getcal : Import server "<<serv.getServerName()<<" with args "<<arguments<<" and sync app "<<program;
+            qDebug()<<"Getcal : Import server "<<serv.getServerName();
             ++currentServerImport;
             QObject::connect(importProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                              this, SLOT(importServer(int, QProcess::ExitStatus)));
             importProcess->setProcessEnvironment(mokoEnv);
-            importProcess->setStandardErrorFile("/tmp/getcal_sync.err");
-            importProcess->setStandardOutputFile("/tmp/getcal_sync.log");
+            importProcess->setStandardErrorFile("/tmp/getcal_sync_"+serv.getServerName()+".err");
+            importProcess->setStandardOutputFile("/tmp/getcal_sync_"+serv.getServerName()+".log");
             importProcess->start(program, arguments);
         }else{
             delete progBar;
