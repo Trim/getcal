@@ -1,36 +1,63 @@
 <html>
-<h1>Introduction</h1>
-<p>The configuration of servers in getcal is the same than ics2qtcal.<br/>
-The main idea is to get ics files (they can end by .ics or not) from a server passing some parameters to server.</p>
+<h2>Introduction</h2>
+<p>The configuration of servers in getcal is the same than in ics2qtcal.<br/>
+The main idea is to get ics files (they can end by .ics or not) from a server using some parameters.</p>
 
-<h1>Username and Password</h1>
-<p>To download these files, you may need to enter a <em>user name</em> and a <em>password</em>. These parameters are <em>not</em> mandatory.</p>
+<h2>Configuration</h2>
+<p><em>Name</em> is a unique name to save these settings</p>
 
-<h1>Server URL parameter and calendars</h1>
-<p>There's a big probability that calendars (with .ics extension or not) files hosted on the same server will have a big part of their URL which is common.<br/>
-The idea of <em>Server URL</em> is to place in it this big common part of URL and to save in <em>Calendars</em> the end of the URL which isn't shared.</p>
+<h3><em>Server</em> tab</h3>
 
-<h1>Example : one server with one user</h1>
+<h4><em>Server URL</em></h4>
+<p>This is the place to save your calendar URL.
+<br/>When you set this setting, you set the way you'll use the <em>Calendars</em> tab :</p>
+
+<ul>
+	<li>If you have only one calendar on this server, you can specify its full address in <em>Server URL</em> parameter and let the <em>Calendars</em> part empty.</li>
+	<li>If you have several calendar files hosted on the same server, you'll have a big part of their URL in common.<br/>
+In this case, you can set the common URL part in <em>Server URL</em> and add the non-common part of each calendar URL in the <em>Calendars</em> tab.</li>
+</ul>
+
+<h4><em>Username</em> and <em>Password</em></h4>
+<p>To download calendar files, you may need to enter a <em>Username</em> and a <em>Password</em>.<br/>
+If you need them, save them in the right fields. Otherwise, let these two fields empty.</p>
+
+<h2><em>Calendars</em> tab</h2>
+<p>Depending on your situation, you can let this part empty, see <em>Server URL</em> configuration.</p>
+<p>If you need to add different calendars, you can add here every one by adding an entry in the list with the <em>Add calendar</em> button (you have to set a text on the left of the button and then click on it).</p>
+
+<h2>Examples</h2>
+<h3>One user with one calendar</h3>
+<p>In this case, you have only to fill the <em>Name</em> and <em>Server URL</em> settings (and if needed the <em>Username</em> and <em>Password</em></p>
+<ol>
+	<li>Name : a unique name</li>
+	<li>Server URL : http://example.org/path/to/my/calendar</li>
+	<li>Username : Toto</li>
+	<li>Password : ********</li> 
+</ol>
+
+<h3>One user with several calendars</h3>
 <p>For example, if you use the Davical server on example.org you can have some calendars with this urls :</p>
 <ol> 
-<li>http://cal.example.org/davical.php/user1/Personnel</li>
-<li>http://cal.example.org/davical.php/user1/Job.ics</li>
-<li>http://cal.example.org/davical.php/user1/Birthdays</li>
+	<li>http://cal.example.org/davical.php/user1/Personnel</li>
+	<li>http://cal.example.org/davical.php/user1/Job.ics</li>
+	<li>http://cal.example.org/davical.php/user1/Birthdays</li>
 </ol>
-<p>In this case you'll write "http://cal.example.org/davical.php/user1" in <em>server URL</em> and you'll add calendars :</p>
+<p>In this case you'll write "http://cal.example.org/davical.php/user1" in <em>Server URL</em> and you'll add calendars :</p>
 <ol>
-<li>Personnel</li>
-<li>Job.ics</li>
-<li>Birthdays</li>
+	<li>Personnel</li>
+	<li>Job.ics</li>
+	<li>Birthdays</li>
 </ol>
 
-<h1>Example : one server with two users sharing calendars</h1>
+<h3>One server with two users sharing some calendars</h3>
 
-<p>Let say that there's another user, user2, which have some calendars on the same Davical server and that user1 can access user2's calendars within the server.<br/>
+<p>Let say that there's another user, <em>user2</em>, which have some calendars on the same Davical server and that <em>user1</em> can access <em>user2</em>'s calendars within the server.<br/>
 In this case, instead of creating two servers with same user and password, you can set <em>server URL</em> parameter as this : "http://cal.example.org/davical.php/" and add calendars :</p>
 <ol>
-<li>user1/Personnel (so the end of URL)</li>
-<li>user1/Job.ics</li>
-<li>user1/Birthdays</li>
-<li>_user2_/Birthdays (as it's the end of URL and user1 have access to user2's calendars)</li>
-<li>_user2_/Personnel</li>
+	<li>user1/Personnel (so the end of URL)</li>
+	<li>user1/Job.ics</li>
+	<li>user1/Birthdays</li>
+	<li><em>user2</em>/Birthdays (as it's the end of URL and user1 have access to user2's calendars)</li>
+	<li><em>user2</em>/Personnel</li>
+</ol>
