@@ -14,6 +14,8 @@ ServerSettings::ServerSettings(QWidget *parent, Qt::WFlags f) :
 
     QMenu *menu = QSoftMenuBar::menuFor(this);
     menu->addAction("Add a new server", _editServer, SLOT(addServer()));
+    QSoftMenuBar::setHelpEnabled(this,true);
+    QSoftMenuBar::setInputMethodEnabled (this, false);
 
     QAction * editAction = menu->addAction("Edit this server", this, SLOT(editServer()));
     menu->insertSeparator(editAction);
