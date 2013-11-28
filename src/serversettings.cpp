@@ -60,7 +60,10 @@ void ServerSettings::setServer(IcalServer *server){
     uiServerList->clear();
     QString srvName;
     foreach(srvName, _serverMap->keys()){
-        uiServerList->addItem(srvName);
+        QListWidgetItem * srvItem = new QListWidgetItem(srvName, uiServerList);
+        QSize * srvSize = new QSize(100,40);
+        srvItem->setSizeHint(*srvSize);
+        //uiServerList->addItem(srvName);
     }
     saveSettings();
 }

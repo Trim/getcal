@@ -13,6 +13,8 @@
 
 #include <QWidget>
 #include <QListWidget>
+#include <QListWidgetItem>
+#include <QSize>
 #include <QPushButton>
 
 #include "icalserver.h"
