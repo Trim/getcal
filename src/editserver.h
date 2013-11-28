@@ -4,6 +4,9 @@
 #include <QWidget>
 #include "ui_editserver.h"
 #include "icalserver.h"
+#include <qpushbutton.h>
+#include <qsoftmenubar.h>
+#include <QMenu>
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QDebug>
