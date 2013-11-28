@@ -21,6 +21,11 @@
 
 #define SETTINGS_SERVER_GRP "servers"
 
+/*
+ * The ServerSettings class is class which save and load settings
+ * and display the loaded servers in a list to modify them with
+ * the EditServer class.
+ */
 class ServerSettings : public QWidget, public Ui_ServerSettings
         {
     Q_OBJECT

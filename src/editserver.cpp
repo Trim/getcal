@@ -5,6 +5,11 @@ EditServer::EditServer(QWidget *parent, Qt::WFlags f) :
 {
     setupUi(this);
     qRegisterMetaType<IcalServer>("IcalServer");
+
+    // Construct context menu, available to the user via Qtopia's soft menu bar.
+    QMenu *menu = QSoftMenuBar::menuFor(this);
+    QSoftMenuBar::setHelpEnabled(this,true);
+    QSoftMenuBar::setInputMethodEnabled (this, true);
 }
 
 EditServer::~EditServer(){

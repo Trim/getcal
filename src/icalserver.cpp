@@ -98,7 +98,7 @@ void IcalServer::setServerName(QString name){
 void IcalServer::setServerAddress(QString address){
     // As qtmoko-ics2qtcal add the '/' at the end of server address, we remove it here
     if(address.endsWith('/')){
-        address.remove(address.lastIndexOf("/"));
+        address.remove(address.lastIndexOf('/'),1);
     }
 
     _serverAddress=address;
@@ -115,7 +115,7 @@ void IcalServer::setUserPass(QString userPassword){
 void IcalServer::addCalendar(QString calendar){
     // As qtmoko-ics2qtcal add the '/' at the beginning of calendar address, we remove it here
     if(calendar.startsWith('/')){
-        calendar.remove(calendar.indexOf('/'));
+        calendar.remove(calendar.indexOf('/'),1);
     }
 
     _calendars->append(calendar);
