@@ -11,7 +11,7 @@ Getcal::Getcal(QWidget *parent, Qt::WFlags f)
 
     // Construct context menu, available to the user via Qtopia's soft menu bar.
     QMenu *menu = QSoftMenuBar::menuFor(this);
-    QSoftMenuBar::setHelpEnabled(this,false);
+    QSoftMenuBar::setHelpEnabled(this,true);
     QSoftMenuBar::setInputMethodEnabled (this, false);
 
     winSettings = new ServerSettings(parent, f);
@@ -128,27 +128,35 @@ void Getcal::importServer(int exitCode, QProcess::ExitStatus exitStatus){
 
             QString program = "sync4ics2openmoko.sh";
             QStringList arguments;
-            arguments << "-s "+ serv.getServerAddress();
+
+            QString srvName = serv.getServerName();
+            QString addr = serv.getServerAddress();
             QString user = serv.getUserName();
             QString pass = serv.getPassword();
+
             if(!user.isEmpty() && !pass.isEmpty()){
                 arguments << "-u"+user;
                 arguments << "-p"+pass;
             }
-            arguments << "-v";
 
-            if(!serv.getCalendars().isEmpty()){
+            if(serv.getCalendars().isEmpty()){
+                arguments << addr;
+            }else{
+                arguments << "-s "+addr;
                 arguments << serv.getCalendars();
             }
 
             QProcess *importProcess = new QProcess(this);
-            qDebug()<<"Getcal : Import server "<<serv.getServerName();
+            qDebug()<<"Getcal : Import server "<<srvName;
+
             ++currentServerImport;
             QObject::connect(importProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
                              this, SLOT(importServer(int, QProcess::ExitStatus)));
+
             importProcess->setProcessEnvironment(mokoEnv);
-            importProcess->setStandardErrorFile("/tmp/getcal_sync_"+serv.getServerName()+".err");
-            importProcess->setStandardOutputFile("/tmp/getcal_sync_"+serv.getServerName()+".log");
+            importProcess->setStandardErrorFile("/tmp/getcal_sync_"+srvName+".err");
+            importProcess->setStandardOutputFile("/tmp/getcal_sync_"+srvName+".log");
+
             importProcess->start(program, arguments);
         }else{
             delete progBar;
