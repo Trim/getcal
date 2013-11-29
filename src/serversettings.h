@@ -22,6 +22,7 @@
 #include "editserver.h"
 
 #define SETTINGS_SERVER_GRP "servers"
+#define SETTINGS_SERVER_HEIGHT 80
 
 /*
  * The ServerSettings class is class which save and load settings
@@ -42,6 +43,9 @@ public:
     ServerSettings(QWidget *parent=0, Qt::WFlags f=0);
     ~ServerSettings();
     QList<IcalServer> getServers();
+
+private:
+    insertServer(QString srvName);
 
 public slots:
     void openSettings();
