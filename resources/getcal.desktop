@@ -5,6 +5,6 @@ Context=Getcal
 [Desktop Entry]
 Comment[]=An application to get online calendars
 Exec=getcal
-Icon=getcal/Getcal
+Icon=getcal/getcal
 Type=Application
 Name[]=Getcal
