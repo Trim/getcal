@@ -22,7 +22,7 @@
 #include "editserver.h"
 
 #define SETTINGS_SERVER_GRP "servers"
-#define SETTINGS_SERVER_HEIGHT 80
+#define SETTINGS_SERVER_LIST_HEIGHT 80
 
 /*
  * The ServerSettings class is class which save and load settings
