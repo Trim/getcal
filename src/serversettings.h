@@ -45,7 +45,7 @@ public:
     QList<IcalServer> getServers();
 
 private:
-    insertServer(QString srvName);
+    void insertServer(QString srvName);
 
 public slots:
     void openSettings();
