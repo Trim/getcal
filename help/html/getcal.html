@@ -17,7 +17,7 @@ The main idea is to get ics files (they can end by .ics or not) from a server us
 	<li>If you have several calendar files hosted on the same server, you'll have a big part of their URL in common.<br/>
 In this case, you can set the common URL part in <em>Server URL</em> and add the non-common part of each calendar URL in the <em>Calendars</em> tab.</li>
 </ul>
-
+<p><em>Note</em> : getcal will refuse to add a '/' at the end of the <em>Server URL</em> parameter, because ics2qtcal will do it automatically.</p>
 <h4><em>Username</em> and <em>Password</em></h4>
 <p>To download calendar files, you may need to enter a <em>Username</em> and a <em>Password</em>.<br/>
 If you need them, save them in the right fields. Otherwise, let these two fields empty.</p>
@@ -25,6 +25,7 @@ If you need them, save them in the right fields. Otherwise, let these two fields
 <h2><em>Calendars</em> tab</h2>
 <p>Depending on your situation, you can let this part empty, see <em>Server URL</em> configuration.</p>
 <p>If you need to add different calendars, you can add here every one by adding an entry in the list with the <em>Add calendar</em> button (you have to set a text on the left of the button and then click on it).</p>
+<p><em>Note</em> : getcal will refuse to add a '/' at the begin of the <em>calendar names</em>, because ics2qtcal will do it automatically.</p>
 
 <h2>Examples</h2>
 <h3>One user with one calendar</h3>
@@ -53,7 +54,7 @@ If you need them, save them in the right fields. Otherwise, let these two fields
 <h3>One server with two users sharing some calendars</h3>
 
 <p>Let say that there's another user, <em>user2</em>, which have some calendars on the same Davical server and that <em>user1</em> can access <em>user2</em>'s calendars within the server.<br/>
-In this case, instead of creating two servers with same user and password, you can set <em>server URL</em> parameter as this : "http://cal.example.org/davical.php/" and add calendars :</p>
+In this case, instead of creating two servers with same user and password, you can set <em>server URL</em> parameter as this : "http://cal.example.org/davical.php" and add calendars :</p>
 <ol>
 	<li>user1/Personnel (so the end of URL)</li>
 	<li>user1/Job.ics</li>
