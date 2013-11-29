@@ -29,4 +29,4 @@ See [Installation](./INSTALL.md) file.
 
 How to configure Getcal ?
 =========================
-See [Configuration](./Configuration.md) file.
+See "Help" in application or [here](./help/html/getcal.html). 
