@@ -60,7 +60,7 @@ void ServerSettings::setServer(IcalServer *server){
     uiServerList->clear();
 
     foreach(QString srvName, _serverMap->keys()){
-        insertServer(srvName)
+        insertServer(srvName);
     }
 
     saveSettings();
