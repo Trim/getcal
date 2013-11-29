@@ -29,9 +29,9 @@ TARGET = getcal
 # Package information (used for qbuild packages)
 pkg [
     name=getcal
-    desc="Get your calendars"
+    desc="Get your online calendars"
     license=GPLv3
-    version=1.2
+    version=1.4
     maintainer="Adrien Dorsaz <adrien@adorsaz.ch>"
 ]
 
