@@ -54,11 +54,12 @@ void Getcal::importEvents(){
     serverList = winSettings->getServers();
     totalServer = serverList.size();
 
-    progBar = new QProgressBar();
-    progBar->setMinimum(0);
-    progBar->setMaximum(totalServer);
-    uiMainLayout->addWidget(progBar);
     if(totalServer>0){
+        progBar = new QProgressBar();
+        progBar->setMinimum(0);
+        progBar->setMaximum(totalServer);
+        uiMainLayout->addWidget(progBar);
+
         currentServerImport=0;
         importServer();
     }else{
