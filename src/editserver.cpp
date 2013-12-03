@@ -20,8 +20,8 @@ void EditServer::setConnections(){
     QObject::connect(uiServerNameLine, SIGNAL(textChanged(QString)), _server, SLOT(setServerName(QString)));
     QObject::connect(uiServerNameLine, SIGNAL(textChanged(QString)), this, SLOT(updateUI()));
 
-    QObject::connect(uiServerAddressLine, SIGNAL(textChanged(QString)), _server, SLOT(setServerAddress(QString)));
-    QObject::connect(uiServerAddressLine, SIGNAL(textChanged(QString)), this, SLOT(updateUI()));
+    QObject::connect(uiServerAddressLine, SIGNAL(editingFinished()), this, SLOT(setServerAddress()));
+    QObject::connect(uiServerAddressLine, SIGNAL(editingFinished()), this, SLOT(updateUI()));
 
     QObject::connect(uiUserNameLine, SIGNAL(textChanged(QString)), _server, SLOT(setUserName(QString)));
     QObject::connect(uiUserNameLine, SIGNAL(textChanged(QString)), this, SLOT(updateUI()));
@@ -92,4 +92,8 @@ void EditServer::closeEvent(QCloseEvent *event){
         emit endEdit(_server);
         QWidget::closeEvent(event);
     }
+}
+
+void EditServer::setServerAddress(){
+    _server->setServerAddress(uiServerNameLine->text());
 }
