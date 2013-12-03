@@ -32,6 +32,7 @@ private slots:
     void updateUI();
     void addCalendar();
     void deleteCalendar();
+    void setServerAddress(); 
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
