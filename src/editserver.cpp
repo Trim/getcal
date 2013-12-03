@@ -95,5 +95,5 @@ void EditServer::closeEvent(QCloseEvent *event){
 }
 
 void EditServer::setServerAddress(){
-    _server->setServerAddress(uiServerNameLine->text());
+    _server->setServerAddress(uiServerAddressLine->text());
 }
