@@ -19,6 +19,7 @@ private:
     IcalServer *_server;
     bool _editionMode;
     void setConnections();
+    bool _cancelEdit;
 
 public:
     explicit EditServer(QWidget *parent = 0, Qt::WFlags f=0);
@@ -33,6 +34,7 @@ private slots:
     void addCalendar();
     void deleteCalendar();
     void setServerAddress(); 
+    void cancelEdit();
 
 protected:
     virtual void closeEvent(QCloseEvent *event);

@@ -10,6 +10,8 @@ EditServer::EditServer(QWidget *parent, Qt::WFlags f) :
     QMenu *menu = QSoftMenuBar::menuFor(this);
     QSoftMenuBar::setHelpEnabled(this,true);
     QSoftMenuBar::setInputMethodEnabled (this, true);
+
+    menu->addAction("Cancel", this, SLOT(cancelEdit()));
 }
 
 EditServer::~EditServer(){
@@ -39,6 +41,7 @@ void EditServer::addServer(){
     setConnections();
     updateUI();
     uiServerNameLine->setReadOnly(false);
+    _cancelEdit=false;
 }
 
 void EditServer::editServer(IcalServer *server){
@@ -47,6 +50,7 @@ void EditServer::editServer(IcalServer *server){
     setConnections();
     updateUI();
     uiServerNameLine->setReadOnly(true); // Prevent modification for server name because it's not really well supported right now
+    _cancelEdit=false;
 }
 
 void EditServer::addCalendar(){
@@ -82,18 +86,28 @@ void EditServer::updateUI(){
 
 void EditServer::closeEvent(QCloseEvent *event){
     qDebug()<<"EditServer : end of edition for server : "<<_server->getServerName();
-    if(_server->getServerName().isEmpty()){
-        QMessageBox* msgBox = new QMessageBox(this);
-        msgBox->setText("You have to enter a name for this server.");
-        msgBox->setIcon(QMessageBox::Warning);
-        msgBox->exec();
-        event->ignore();
-    }else{
-        emit endEdit(_server);
+    if(_cancelEdit){
+        qDebug()<<"EditServer : modifications cancelled";
         QWidget::closeEvent(event);
+    }else{
+        if(_server->getServerName().isEmpty()){
+            QMessageBox* msgBox = new QMessageBox(this);
+            msgBox->setText("You have to enter a name for this server.");
+            msgBox->setIcon(QMessageBox::Warning);
+            msgBox->exec();
+            event->ignore();
+        }else{
+            emit endEdit(_server);
+            QWidget::closeEvent(event);
+        }
     }
 }
 
 void EditServer::setServerAddress(){
     _server->setServerAddress(uiServerAddressLine->text());
+}
+
+void EditServer::cancelEdit(){
+    _cancelEdit=true;
+    close();
 }
